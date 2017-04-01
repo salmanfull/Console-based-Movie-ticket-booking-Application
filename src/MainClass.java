@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class MainClass {
 
 	public static void main(String[] args) {
-		Theater theater = new Theater(2, 2); // can change the parameters upto 26, 26 which represents
+		Theater theater = new Theater(5, 5); // can change the parameters upto 26, 26 which represents
 						     // number of rows and columns of seats in the theater.
 		Scanner in = new Scanner(System.in);
 		while (true) {
