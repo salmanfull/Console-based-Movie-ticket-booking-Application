@@ -4,10 +4,8 @@ import java.util.Scanner;
 public class MainClass {
 
 	public static void main(String[] args) {
-		Theater theater = new Theater(2, 2); // can change the parameters upto
-												// 26, 26 which represents
-												// number of rows and columns in
-												// the theater.
+		Theater theater = new Theater(10, 10); // can change the parameters upto  26, 26 which represents
+												// number of rows and columns in the theater.										 
 		Scanner in = new Scanner(System.in);
 		while (true) {
 			System.out.println("1. Book a ticket.");
@@ -30,14 +28,34 @@ public class MainClass {
 					continue;
 				}
 				theater.printSeats();
-				System.out.println("Enter a Seat number:");
-				String seatNo = in.nextLine();
-				if (!theater.validSeat(seatNo)) {
-					System.out.println("Not a Valid seat number. Please try again.");
-					continue;
-				}
-				System.out.println("Enter your name:");
-				String name = in.nextLine();
+				String seatNo;
+				boolean isSeatValid = false;
+				do {
+					System.out.println("Enter a Seat number:");
+					seatNo = in.nextLine();
+					isSeatValid = theater.validSeat(seatNo);
+					if (!isSeatValid) {
+						System.out.println("Not a Valid seat number. Please try again.");
+						continue;
+					}
+				} while (!isSeatValid);
+
+				String name;
+				boolean nameValid = true;
+				do {
+					System.out.println("Enter your name:");
+					name = in.nextLine();
+					if (name.length() == 0) {
+						System.out.println("Name cannot be empty. Please try again.");
+						nameValid = false;
+						continue;
+					} else if (name.matches(".*\\d")) {
+						System.out.println("Name cannot contain a number. Please try again.");
+						nameValid = false;
+						continue;
+					}
+					nameValid = true;
+				} while (!nameValid);
 				if (theater.bookTicket(seatNo, name)) {
 					System.out.println("Ticket booked Successfully --> SeatNumber : " + seatNo + "   Name :" + name);
 					theater.printSeats();
