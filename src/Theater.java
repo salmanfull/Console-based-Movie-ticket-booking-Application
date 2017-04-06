@@ -57,14 +57,18 @@ public class Theater {
    /*
     * method to check whether the given seat number is the valid one or not.
     */
-   public boolean validSeat(String seatNo){
+   public boolean validSeat(String seatNo) throws InvalidSeatException{
 	   seatNo = seatNo.toUpperCase();
 	   if(seatNo.length()!=2 && seatNo.length()!=3) {                              	 
-		  return false;
+		  throw new InvalidSeatException("Invalid seat number.");
 	   }	   
 	   int row = seatNo.charAt(0)-65;
 	   int col=getColumnNumber(seatNo);
-	   return row>=0 && row<this.row && col>=0 && col<this.col;      // check that the row and column are within the range.
+	   if(row>=0 && row<this.row && col>=0 && col<this.col)      // check that the row and column are within the range.
+   			return true;
+	   else
+		   throw new InvalidSeatException("Invalid seat number.");
+		   
    }
    
    /*

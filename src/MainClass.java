@@ -33,11 +33,15 @@ public class MainClass {
 				do {
 					System.out.println("Enter a Seat number:");
 					seatNo = in.nextLine();
-					isSeatValid = theater.validSeat(seatNo);
-					if (!isSeatValid) {
-						System.out.println("Not a Valid seat number. Please try again.");
-						continue;
-					}
+					//if (!isSeatValid) {
+						try{
+							isSeatValid = theater.validSeat(seatNo);
+						}
+						catch(InvalidSeatException e){
+							System.out.println(e.getMessage());
+							continue;
+						}
+		
 				} while (!isSeatValid);
 
 				String name;
